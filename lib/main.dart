@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newflutterchatappwithfirebase/pages/login_page.dart';
+import 'package:newflutterchatappwithfirebase/themes/light_mode.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,10 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: lightMode,
       home:  LoginPage(),
     );
   }
