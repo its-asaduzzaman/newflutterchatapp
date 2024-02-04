@@ -34,9 +34,18 @@ class LoginPage extends StatelessWidget {
               height: 25,
             ),
             //email textField
-            const MyTextField(hintText: "Email"),
-
+            const MyTextField(
+              hintText: "Email",
+              obscureText: false,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
             //pw TextField
+            const MyTextField(
+              hintText: "Password",
+              obscureText: true,
+            ),
 
             //LoginButton
 
