@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:newflutterchatappwithfirebase/components/my_textfield.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  //emila pw controller
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,17 +37,19 @@ class LoginPage extends StatelessWidget {
               height: 25,
             ),
             //email textField
-            const MyTextField(
+            MyTextField(
               hintText: "Email",
               obscureText: false,
+              controller: _emailController,
             ),
             const SizedBox(
               height: 10,
             ),
             //pw TextField
-            const MyTextField(
+            MyTextField(
               hintText: "Password",
               obscureText: true,
+              controller: _passwordController,
             ),
 
             //LoginButton
