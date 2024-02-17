@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newflutterchatappwithfirebase/components/my_button.dart';
 import 'package:newflutterchatappwithfirebase/components/my_textfield.dart';
 
 class LoginPage extends StatelessWidget {
@@ -6,6 +7,9 @@ class LoginPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   LoginPage({Key? key}) : super(key: key);
+
+  // login method
+  void login() {}
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +30,7 @@ class LoginPage extends StatelessWidget {
             ),
             //welcome back message
             Text(
-              "Welcome back. you've benn missed!",
+              "Welcome back. you've been missed!",
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
                 fontSize: 16,
@@ -51,10 +55,35 @@ class LoginPage extends StatelessWidget {
               obscureText: true,
               controller: _passwordController,
             ),
-
+            const SizedBox(
+              height: 25,
+            ),
             //LoginButton
 
             //Register Now
+            MyButton(
+              text: "Login",
+              onTap: login,
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Not a member? ",
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.primary),
+                ),
+                Text(
+                  "Register now,",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary),
+                ),
+              ],
+            ),
           ],
         ),
       ),
