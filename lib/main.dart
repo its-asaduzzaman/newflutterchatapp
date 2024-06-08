@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:newflutterchatappwithfirebase/pages/login_page.dart';
-import 'package:newflutterchatappwithfirebase/pages/register_page.dart';
 import 'package:newflutterchatappwithfirebase/themes/light_mode.dart';
+import 'package:newflutterchatappwithfirebase/auth/login_or_register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,9 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: lightMode,
-      home:  RegisterPage(),
+      home: LoginOrRegister(),
     );
   }
 }
-
-

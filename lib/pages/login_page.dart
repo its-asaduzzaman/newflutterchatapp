@@ -6,7 +6,10 @@ class LoginPage extends StatelessWidget {
   //emila pw controller
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  LoginPage({Key? key}) : super(key: key);
+  // tap to go register page
+  final void Function()? onTap;
+
+  LoginPage({Key? key, required this.onTap}) : super(key: key);
 
   // login method
   void login() {}
@@ -76,11 +79,14 @@ class LoginPage extends StatelessWidget {
                   style:
                       TextStyle(color: Theme.of(context).colorScheme.primary),
                 ),
-                Text(
-                  "Register now,",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.primary),
+                GestureDetector(
+                  onTap: onTap,
+                  child: Text(
+                    "Register now,",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary),
+                  ),
                 ),
               ],
             ),
