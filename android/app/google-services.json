@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "52790497968",
+    "project_id": "chatapptuto2024",
+    "storage_bucket": "chatapptuto2024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52790497968:android:5d0fa0e2e1dfc6c7ab2175",
+        "android_client_info": {
+          "package_name": "com.example.newflutterchatappwithfirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPnAvsz27zxsDQQl18n_K6bB5jXJ1aBKI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
