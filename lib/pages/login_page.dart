@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newflutterchatappwithfirebase/auth/auth_service.dart';
 import 'package:newflutterchatappwithfirebase/components/my_button.dart';
 import 'package:newflutterchatappwithfirebase/components/my_textfield.dart';
 
@@ -12,7 +13,26 @@ class LoginPage extends StatelessWidget {
   LoginPage({Key? key, required this.onTap}) : super(key: key);
 
   // login method
-  void login() {}
+  void login(BuildContext context) async {
+    //auth service
+    final authService = AuthService();
+
+    //login
+    try {
+      await authService.signInWithEmailPassword(
+          _emailController.text, _passwordController.text);
+    }
+
+    //catch any errors
+    catch (e) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(e.toString()),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +86,7 @@ class LoginPage extends StatelessWidget {
             //Register Now
             MyButton(
               text: "Login",
-              onTap: login,
+              onTap: () => login(context),
             ),
             const SizedBox(
               height: 25,
