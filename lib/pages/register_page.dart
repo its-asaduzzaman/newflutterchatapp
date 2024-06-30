@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newflutterchatappwithfirebase/auth/auth_service.dart';
 
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
@@ -12,9 +13,39 @@ class RegisterPage extends StatelessWidget {
 
   // tap to go register page
   final void Function()? onTap;
-  RegisterPage({Key? key,required this.onTap}) : super(key: key);
+  RegisterPage({Key? key, required this.onTap}) : super(key: key);
   //register method
-  void register() {}
+  void register(BuildContext context) {
+    //get auth service
+    final _auth = AuthService();
+
+    //if the password match then create the user
+    if (_passwordController.text == _confirmPasswordController.text) {
+      try {
+        _auth.signUpWithEmailPassword(
+            _emailController.text, _passwordController.text);
+      } catch (e) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(e.toString()),
+          ),
+        );
+      }
+    }
+
+    // if password not match then tell the user to fix
+
+    else {
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialog(
+          title: Text("password don't match"),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +107,7 @@ class RegisterPage extends StatelessWidget {
             //Register Now
             MyButton(
               text: "Register",
-              onTap: register,
+              onTap: () => register(context),
             ),
             const SizedBox(
               height: 25,
@@ -89,13 +120,15 @@ class RegisterPage extends StatelessWidget {
                   style:
                       TextStyle(color: Theme.of(context).colorScheme.primary),
                 ),
-                GestureDetector( onTap: onTap, child: Text(
-                  "Login now,",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.primary),
-                ),),
-
+                GestureDetector(
+                  onTap: onTap,
+                  child: Text(
+                    "Login now,",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary),
+                  ),
+                ),
               ],
             ),
           ],
