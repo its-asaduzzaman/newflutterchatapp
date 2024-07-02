@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:newflutterchatappwithfirebase/auth/auth_service.dart';
+
 import 'package:newflutterchatappwithfirebase/components/my_button.dart';
 import 'package:newflutterchatappwithfirebase/components/my_textfield.dart';
+
+import '../services/auth/auth_service.dart';
 
 class LoginPage extends StatelessWidget {
   //emila pw controller
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
   // tap to go register page
   final void Function()? onTap;
 

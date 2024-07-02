@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:newflutterchatappwithfirebase/auth/auth_service.dart';
 
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
+import '../services/auth/auth_service.dart';
 
 class RegisterPage extends StatelessWidget {
   //emila pw controller
@@ -13,7 +13,9 @@ class RegisterPage extends StatelessWidget {
 
   // tap to go register page
   final void Function()? onTap;
+
   RegisterPage({Key? key, required this.onTap}) : super(key: key);
+
   //register method
   void register(BuildContext context) {
     //get auth service
