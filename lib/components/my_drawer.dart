@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../auth/auth_service.dart';
+import '../pages/setting_page.dart';
+
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
+
+  void logout() {
+    final _auth = AuthService();
+    _auth.signOut();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +35,15 @@ class MyDrawer extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 25.0),
                 child: ListTile(
-                  title: Text("H O M E"),
+                  title: const Text("H O M E"),
                   leading: Icon(
                     Icons.home,
                     color: Theme.of(context).colorScheme.primary,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    //pop the drawer
+                    Navigator.pop(context);
+                  },
                 ),
               ),
 
@@ -40,12 +51,22 @@ class MyDrawer extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 25.0),
                 child: ListTile(
-                  title: Text("S E T T I N G"),
+                  title: const Text("S E T T I N G"),
                   leading: Icon(
                     Icons.settings,
                     color: Theme.of(context).colorScheme.primary,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    //pop the drawer
+                    Navigator.pop(context);
+                    //navigate to the setting page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SettingPage(),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
@@ -55,12 +76,12 @@ class MyDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 25.0, bottom: 25.0),
             child: ListTile(
-              title: Text("L O G O U T"),
+              title: const Text("L O G O U T"),
               leading: Icon(
                 Icons.logout,
                 color: Theme.of(context).colorScheme.primary,
               ),
-              onTap: () {},
+              onTap: logout,
             ),
           ),
         ],
