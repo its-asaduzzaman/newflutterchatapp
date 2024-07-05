@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:newflutterchatappwithfirebase/models/message.dart';
 
 class ChatServices {
-//get instance of firestore
+//get instance of firestore and auth
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
 //get user stream
   Stream<List<Map<String, dynamic>>> getUsersStream() {
@@ -17,6 +20,45 @@ class ChatServices {
   }
 
 //send messages
+  Future<void> sendMessage(String receiverId, message) async {
+    //get current user info
+    final String currentUserId = _auth.currentUser!.uid;
+    final String currentUserEmail = _auth.currentUser!.email!;
+    final Timestamp timestamp = Timestamp.now();
+
+    //create a new message
+    Message newMessage = Message(
+      senderID: currentUserId,
+      senderEmail: currentUserEmail,
+      receiverID: receiverId,
+      message: message,
+      timestamp: timestamp,
+    );
+
+    //construct chat room ID for two user (sorted to ensure uniqueness)
+    List<String> ids = [currentUserId, receiverId];
+    ids.sort(); //sort the ids (this ensure the chatRoomId is the same for any
+    // 2 people)
+    String chatRoomId = ids.join('_');
+
+    //add new message to database
+    await _firestore
+        .collection("chat_rooms")
+        .doc(chatRoomId)
+        .collection("messages")
+        .add(newMessage.toMap());
+  }
 
 //get messages
+  Stream<QuerySnapshot> getMessages(String userId, otherUserId) {
+    List<String> ids = [userId, otherUserId];
+    ids.sort();
+    String chatRoomId = ids.join('_');
+    return _firestore
+        .collection("chat_rooms")
+        .doc(chatRoomId)
+        .collection("message")
+        .orderBy("timestamp", descending: false)
+        .snapshots();
+  }
 }
