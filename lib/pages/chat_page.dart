@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:newflutterchatappwithfirebase/components/chat_bubble.dart';
 import 'package:newflutterchatappwithfirebase/components/my_textfield.dart';
 import 'package:newflutterchatappwithfirebase/services/auth/auth_service.dart';
 import 'package:newflutterchatappwithfirebase/services/chat/chat_services.dart';
@@ -36,8 +37,12 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: Text(receivingEmail),
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.grey,
+        elevation: 0,
       ),
       body: SafeArea(
         child: Column(
@@ -82,7 +87,26 @@ class ChatPage extends StatelessWidget {
 //build message item
   Widget _builderMessageItem(DocumentSnapshot doc) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-    return Text(data["message"]);
+
+    //is current user
+    bool isCurrentUser = data['senderID'] == _authService.getCurrentUser()!.uid;
+
+    //align message to the right if sender is current user otherwise left
+    var alignment =
+        isCurrentUser ? Alignment.centerRight : Alignment.centerLeft;
+    return Container(
+        alignment: alignment,
+        child: Column(
+          crossAxisAlignment: isCurrentUser
+              ? CrossAxisAlignment.end
+              : CrossAxisAlignment.center,
+          children: [
+            ChatBubble(
+              message: data["message"],
+              isCurrentUser: isCurrentUser,
+            ),
+          ],
+        ));
   }
 
   //build message input
@@ -99,9 +123,19 @@ class ChatPage extends StatelessWidget {
         ),
 
         //send button
-        IconButton(
-          onPressed: sendMessage,
-          icon: const Icon(Icons.arrow_upward),
+        Container(
+          decoration: const BoxDecoration(
+            color: Colors.purple,
+            shape: BoxShape.circle,
+          ),
+          margin: const EdgeInsets.only(right: 25),
+          child: IconButton(
+            onPressed: sendMessage,
+            icon: const Icon(
+              Icons.arrow_upward,
+              color: Colors.white,
+            ),
+          ),
         ),
       ],
     );
