@@ -45,7 +45,7 @@ class ChatServices {
     await _firestore
         .collection("chat_rooms")
         .doc(chatRoomId)
-        .collection("messages")
+        .collection("message")
         .add(newMessage.toMap());
   }
 

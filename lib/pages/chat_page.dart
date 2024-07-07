@@ -39,15 +39,17 @@ class ChatPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(receivingEmail),
       ),
-      body: Column(
-        children: [
-          //display all the messages
-          Expanded(
-            child: _builderMessageList(),
-          ),
-          //user input
-          _buildMessageInput(),
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            //display all the messages
+            Expanded(
+              child: _builderMessageList(),
+            ),
+            //user input
+            _buildUserInput(),
+          ],
+        ),
       ),
     );
   }
@@ -84,7 +86,7 @@ class ChatPage extends StatelessWidget {
   }
 
   //build message input
-  Widget _buildMessageInput() {
+  Widget _buildUserInput() {
     return Row(
       children: [
         // text field should take  up most of the space
